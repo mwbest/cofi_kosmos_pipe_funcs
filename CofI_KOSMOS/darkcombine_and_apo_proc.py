@@ -8,9 +8,6 @@ import pandas as pd
 from astropy.table import Table
 from astropy import units as u
 from astropy.io import fits
-import sys
-sys.path.append("/content/pykosmos")
-import kosmos
 __all__ = ['apo_proc', 'darkcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
          trim = True, ilum = None, Saxis = 0, Waxis = 1,
