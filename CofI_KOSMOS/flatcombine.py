@@ -1,6 +1,6 @@
 # Making all necessary imports
 import numpy as np
-#from pathlib import Path
+from pathlib import Path
 from ccdproc import CCDData
 from ccdproc import Combiner, trim_image
 from ccdproc import cosmicray_lacosmic
