@@ -3,14 +3,11 @@ import numpy as np
 #from pathlib import Path
 from ccdproc import CCDData
 from ccdproc import Combiner, trim_image
-#from ccdproc import cosmicray_lacosmic
-#import pandas as pd
-#from astropy.table import Table
-#from astropy import units as u
-#from astropy.io import fits
-import sys
-sys.path.append("/content/pykosmos")
-import kosmos
+from ccdproc import cosmicray_lacosmic
+import pandas as pd
+from astropy.table import Table
+from astropy import units as u
+from astropy.io import fits
 
 __all__ = ['apo_proc','flatcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
