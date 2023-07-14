@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from scipy.stats import poisson
 __all__ = ['plot_dark_with_distributions']
+
 def plot_dark_with_distributions(image, rn, dark_rate,
                                  n_images = 1,
                                  exposure = 1,
