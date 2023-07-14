@@ -209,7 +209,7 @@ def darkcombine(darkfiles_list, bias, directory, trim = False, ilum_value = None
     # otherwise, you will be attempting to save a file that already exists.
     # Thus, please comment this block of code out once you run it.
     hdu = fits.PrimaryHDU(calibrated_combined_darkfiles)
-    hdu.writeto(path/ filename)
+    hdu.writeto(path/ filename, overwrite = True)
     # The block below appends "EXPTIME" keyword to the header of the file containing the combined dark frame.
     # Appended "EXPTIME" has the same value as that of the raw dark frames provided by the user.
     # Please run the following block of code (until the next comment) only once,
