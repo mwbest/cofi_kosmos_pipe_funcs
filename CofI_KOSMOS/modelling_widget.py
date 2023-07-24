@@ -9,11 +9,7 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 # Making all necessary imports.
-!pip install ipympl
-!pip install ipywidgets
-!pip install matplotlib
-!pip install mpl-interactions
-# %matplotlib widget
+%matplotlib widget
 import ipywidgets as widgets
 from IPython.display import display
 from google.colab import output
