@@ -9,7 +9,6 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 # Making all necessary imports.
-%matplotlib widget
 import ipywidgets as widgets
 from IPython.display import display
 from google.colab import output
