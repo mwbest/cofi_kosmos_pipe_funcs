@@ -33,4 +33,5 @@ def doppler_shift(rest, obs):
   z = (obs - rest) / rest
   vel = (c * (math.pow(z, 2) + 2 * z) / (math.pow(z, 2) + 2 * z + 2))
   vel = vel / 100000 / vel.unit * u.km / u.s
+  vel = -vel
   return vel
