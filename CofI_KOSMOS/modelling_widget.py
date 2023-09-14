@@ -219,6 +219,9 @@ def modelling_widget(arcspec, silent = False, model = 'gauss'):
     # Do the plot.
     ax.plot(xpixels, flux)
     plt.draw()
+    plt.title("Fitting of Voigt Profiles on CaT")
+    plt.xlabel("Wavelength in Angstroms", fontsize = 10)
+    plt.ylabel("Flux in ADU/s", fontsize = 10)
 
     # Display widgets.
     display(widgets.HBox([xval1, button1]))
