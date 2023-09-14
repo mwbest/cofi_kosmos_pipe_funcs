@@ -124,7 +124,7 @@ def modelling_widget(arcspec, silent = False, model = 'gauss'):
     elif model == 'voigt':
       button4 = widgets.Button(description = 'Graph Voigt curve')
 
-    fig, ax = plt.subplots(figsize = (9, 3))
+    fig, ax = plt.subplots(figsize = (11, 5))
 
     # Handle plot clicks.
     def onplotclick(event):
