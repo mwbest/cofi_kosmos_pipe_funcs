@@ -210,7 +210,7 @@ def flatcombine(ffiles, bias = None, dark = None, trim = True, normframe = True,
     medflat = Combiner(flist).median_combine()
     # If desired, the median flat is used to detect the illuminated portion of the CCD.
     if illumcor:
-        ilum = kosmos.find_illum(medflat, threshold = threshold, Waxis = Waxis)
+        ilum = pykosmos.find_illum(medflat, threshold = threshold, Waxis = Waxis)
         # Trimming the median flat to only the illuminated portion.
         if Waxis == 1:
             medflat = trim_image(medflat[ilum[0]:(ilum[-1] + 1), :])
@@ -218,7 +218,7 @@ def flatcombine(ffiles, bias = None, dark = None, trim = True, normframe = True,
             medflat = trim_image(medflat[:, ilum[0]:(ilum[-1] + 1)])
     # If desired, divide out the spatially-averaged spectrum response from the flat image.
     if responsecor:
-        medflat = kosmos.flat_response(medflat, smooth = smooth, npix = npix, Saxis = Saxis)
+        medflat = pykosmos.flat_response(medflat, smooth = smooth, npix = npix, Saxis = Saxis)
     # If "illumcore" was set to True, return both the final flat image object
     # and the 1D array used for trimming science images to the illuminated portion of the CCD.
     if illumcor:
