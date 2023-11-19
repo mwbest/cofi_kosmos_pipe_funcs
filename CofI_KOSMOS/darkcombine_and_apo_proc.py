@@ -10,7 +10,7 @@ from astropy import units as u
 from astropy.io import fits
 import sys
 sys.path.append("/content/pykosmos")
-import kosmos
+import pykosmos
 
 __all__ = ['apo_proc', 'darkcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
