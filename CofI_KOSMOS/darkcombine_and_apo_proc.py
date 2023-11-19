@@ -129,10 +129,10 @@ def darkcombine(darkfiles_list, bias, directory, trim = False, ilum_value = None
     This function first checks whether the dark files provided by user
     have the same exposure time. If not, it gives an error and interrupts execution.
     Then, it subtracts bias from each individual dark frame and uses Jim Davenport's
-    "kosmos.biascombine" function to combine the calibrated dark frames.
+    "pykosmos.biascombine" function to combine the calibrated dark frames.
     Finally, it appends "EXPTIME" keyword to the header of the file containing
     the combined dark frame that has the same exposure time value as the raw
-    dark files provided by user. Please read the "Parameters" for imnformation
+    dark files provided by user. Please read the "Parameters" for information
     regarding "trim" and "ilum_value" parameters.
 
     Parameters:
@@ -201,8 +201,8 @@ def darkcombine(darkfiles_list, bias, directory, trim = False, ilum_value = None
     # Returning an array of the calibrated dark files.
     darkfiles_i = pd.read_table("darkfiles.txt", names = ['impath'])
     darkfiles = directory + darkfiles_i['impath'].values
-    # Using Jim Davenport's "kosmos.biascombine" function to combine calibrated dark frames.
-    calibrated_combined_darkfiles = kosmos.biascombine(darkfiles)
+    # Using Jim Davenport's "pykosmos.biascombine" function to combine calibrated dark frames.
+    calibrated_combined_darkfiles = pykosmos.biascombine(darkfiles)
     filename = 'calibrated_combined_darkfiles.fits'
     combined_dark_path = directory + filename
     # The code below saves the combined dark frame as a "fits" file.
