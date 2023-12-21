@@ -16,7 +16,7 @@ __all__ = ['apo_proc','flatcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
          trim = True, ilum = None, Saxis = 1, Waxis = 0,
          EXPTIME = 'EXPTIME', DATASEC = 'DATASEC',
-         CR = True, GAIN = 0.6, READNOISE = 6, CRsigclip = 30):
+         CR = True, GAIN = 0.6, READNOISE = 6, CRsigclip = 40):
     """
     Semi-generalized function to read a "fits" file in, divide by exposure
     time (returns units of ADU/s), and optionally perform basic CCD
@@ -64,7 +64,7 @@ def apo_proc(file, bias = None, flat = None, dark = None,
     READNOISE: string (optional), default = 6
     "Fits" header field containing the "RDNOISE" keyword used by L.A. Cosmic.
 
-    CRsigclip: int (optional), default = 30
+    CRsigclip: int (optional), default = 40
     Sigma-clipping parameter passed to L.A. Cosmic.
 
     gain_apply: bool (optional), default = False
