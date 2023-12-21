@@ -58,10 +58,10 @@ def apo_proc(file, bias = None, flat = None, dark = None,
     CR: bool, default = True
     If True, use the L.A. Cosmic routine to remove cosmic rays from the image before reducing.
 
-    GAIN: string (optional), default = "GAIN"
+    GAIN: string (optional), default = 0.6
     "Fits" header field containing the "GAIN" keyword used by L.A. Cosmic.
 
-    READNOISE: string (optional), default = "RDNOISE"
+    READNOISE: string (optional), default = 6
     "Fits" header field containing the "RDNOISE" keyword used by L.A. Cosmic.
 
     CRsigclip: int (optional), default = 0.01
@@ -80,8 +80,8 @@ def apo_proc(file, bias = None, flat = None, dark = None,
 
     # If cosmic rays are chosen to be removed, the following code will do so:
     if CR:
-        img = cosmicray_lacosmic(img, gain = img.header[GAIN] * u.electron / u.adu,
-                                 readnoise = img.header[READNOISE] * u.electron,
+        img = cosmicray_lacosmic(img, gain = GAIN * u.electron / u.adu,
+                                 readnoise = READNOISE * u.electron,
                                  sigclip = CRsigclip, gain_apply = False)
 
     # Subtracting bias (if it is provided by the user).
