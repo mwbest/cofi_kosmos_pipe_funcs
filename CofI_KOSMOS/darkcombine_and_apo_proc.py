@@ -16,7 +16,7 @@ __all__ = ['apo_proc', 'darkcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
          trim = True, ilum = None, Saxis = 1, Waxis = 0,
          EXPTIME = 'EXPTIME', DATASEC = 'DATASEC',
-         CR = True, GAIN = 0.6, READNOISE = 'RDNOISE', CRsigclip = 0.01):
+         CR = True, GAIN = 0.6, READNOISE = 6, CRsigclip = 0.01):
     """
     Semi-generalized function to read a "fits" file in, divide by exposure
     time (returns units of ADU/s), and optionally perform basic CCD
