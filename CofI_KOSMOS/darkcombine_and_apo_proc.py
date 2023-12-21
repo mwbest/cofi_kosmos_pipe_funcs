@@ -14,9 +14,9 @@ import pykosmos
 
 __all__ = ['apo_proc', 'darkcombine']
 def apo_proc(file, bias = None, flat = None, dark = None,
-         trim = True, ilum = None, Saxis = 0, Waxis = 1,
+         trim = True, ilum = None, Saxis = 1, Waxis = 0,
          EXPTIME = 'EXPTIME', DATASEC = 'DATASEC',
-         CR = False, GAIN = 'GAIN', READNOISE = 'RDNOISE', CRsigclip = 4.5):
+         CR = True, GAIN = 'GAIN', READNOISE = 'RDNOISE', CRsigclip = 0.01):
     """
     Semi-generalized function to read a "fits" file in, divide by exposure
     time (returns units of ADU/s), and optionally perform basic CCD
@@ -49,16 +49,13 @@ def apo_proc(file, bias = None, flat = None, dark = None,
     DATASEC: string (optional), default = "DATASEC"
     "Fits" header field containing the data section of the CCD (to remove the bias section). Used if "trim=True".
 
-    Saxis: int (optional), default is 0
-    Set which axis is the spatial dimension. For DIS, Saxis=0 (corresponds to "NAXIS2" in the header).
-    For KOSMOS, Saxis=1.
+    Saxis: int (optional), default is 1
+    Set which axis is the spatial dimension. 
 
-    Waxis: int (optional), default is 1
-    Set which axis is the wavelength dimension. For DIS, Waxis=1 (corresponds to "NAXIS1" in the header).
-    For KOSMOS, Waxis=0.
-    Note: if Saxis is changed, Waxis will be updated, and visa versa.
+    Waxis: int (optional), default is 0
+    Set which axis is the wavelength dimension. 
 
-    CR: bool, default = False
+    CR: bool, default = True
     If True, use the L.A. Cosmic routine to remove cosmic rays from the image before reducing.
 
     GAIN: string (optional), default = "GAIN"
@@ -67,7 +64,7 @@ def apo_proc(file, bias = None, flat = None, dark = None,
     READNOISE: string (optional), default = "RDNOISE"
     "Fits" header field containing the "RDNOISE" keyword used by L.A. Cosmic.
 
-    CRsigclip: int (optional), default = 4.5
+    CRsigclip: int (optional), default = 0.01
     Sigma-clipping parameter passed to L.A. Cosmic.
 
     gain_apply: bool (optional), default = False
@@ -101,18 +98,10 @@ def apo_proc(file, bias = None, flat = None, dark = None,
     # If desired, trimming off the bias section.
     if trim:
         img = trim_image(img, fits_section = img.header[DATASEC])
-    # Old DIS default was Saxis=0, Waxis=1, shape = (1028,2048).
-    # KOSMOS is swapped, shape = (4096, 2148).
-    if (Saxis == 1) | (Waxis == 0):
-        # If either axis is swapped, swap them both.
-        Saxis = 1
-        Waxis = 0
     # If desired, trimming to the illuminated region of the CCD.
     if ilum is None:
         pass
     else:
-        if Waxis == 1:
-            img = trim_image(img[ilum[0]:(ilum[-1] + 1), :])
         if Waxis == 0:
             img = trim_image(img[:, ilum[0]:(ilum[-1] + 1)])
     # Dividing out the flat (if it is provided by the user).
