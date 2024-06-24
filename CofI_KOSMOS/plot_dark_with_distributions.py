@@ -51,7 +51,7 @@ def plot_dark_with_distributions(image, rn, dark_rate,
 
     """
     # Plotting the histogram of dark pixel values.
-    hist = plt.hist(image.flatten(), bins = 100, align = 'mid', range = (0,200),
+    hist = plt.hist(image.flatten(), bins = 100, align = 'mid', range = (-50,200),
                  density = True, label = "Dark frame");
     # Computing/setting necessary inputs/data for Poisson distribution.
     expected_mean_dark = dark_rate * exposure / gain
