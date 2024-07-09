@@ -13,3 +13,5 @@ from .darkcombine_and_apo_proc import *
 from .doppler_shift import *
 from .modelling_widget import *
 from .process_data_and_convert_to_degrees import *
+from .identify import *
+from .apextract import *
