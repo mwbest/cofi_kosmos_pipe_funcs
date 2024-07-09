@@ -380,7 +380,7 @@ def identify_widget(arcspec, silent=False):
         style={'description_width': 'initial'})
 
     linename =     widgets.Dropdown(
-        options=['7032.41', '8377.61', '8495.36', '6402.25', '7245.17']
+        options=['7032.41', '8377.61', '8495.36', '6402.25', '7245.17'],
         #value='Enter Wavelength',
         description='Wavelength:',
         disabled=False,
