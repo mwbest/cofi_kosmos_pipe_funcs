@@ -360,8 +360,8 @@ def identify_widget(arcspec, silent=False):
     in the Jupyter notebook, e.g.:
         %matplotlib notebook
     1) Click on arc-line features (peaks) in the plot. The Pixel Value box should update.
-    2) Enter the known wavelength of the feature in the Wavelength box.
-    3) Click the Assign button, a red line will be drawn marking the feature.
+    2) Select the known wavelength of the feature in the Wavelength box.
+    3) Click the Assign button, and a red line will be drawn marking the feature.
     4) When you've identified all your lines, stop the interaction for (or close) the figure.'''
 
     if not silent:
@@ -380,7 +380,7 @@ def identify_widget(arcspec, silent=False):
         style={'description_width': 'initial'})
 
     linename =     widgets.Dropdown(
-        options=['7032.41', '8377.61', '8495.36', '6402.25', '7245.17'],
+        options=['7032.41', '7245.17', '6402.25', '6506.53', '6929.47', '6143.06', '6678.28', '6717.04', '6334.43', '7438.90', '8377.61', '8495.36', '8780.62', '8654.38', '8300.36'],
         #value='Enter Wavelength',
         description='Wavelength:',
         disabled=False,
