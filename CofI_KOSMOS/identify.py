@@ -379,6 +379,7 @@ def identify_widget(arcspec, silent=False):
         description='Pixel Value (from click):',
         style={'description_width': 'initial'})
 
+           #asta
     linename =     widgets.Dropdown(
         options=['7032.41', '7245.17', '6402.25', '6506.53', '6929.47', '6143.06', '6678.28', '6717.04', '6334.43', '7438.90', '8377.61', '8495.36', '8780.62', '8654.38', '8300.36'],
         #value='Enter Wavelength',
