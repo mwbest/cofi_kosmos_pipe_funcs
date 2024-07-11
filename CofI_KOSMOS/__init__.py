@@ -15,3 +15,4 @@ from .modelling_widget import *
 from .process_data_and_convert_to_degrees import *
 from .identify import *
 from .workon_functions import *
+from .identify_widget import *
