@@ -410,15 +410,23 @@ def identify_widget(arcspec, silent=False):
                                  xval.value = fitted_x
                                  # fall back to click itself if that doesnt work
                                  #xval.value = event.xdata
-         else:
+        else:
+                    fitted_x = event.xdata
+                    xval.value = fitted_x
+
+                with open("clicked_points.dat", "a") as file:
+                            file.write(f"{fitted_x} {wavelength}\n")
+
+                
+         '''else:
                      fitted_x = event.xdata
                      xval.value = fitted_x
-                    # If the region is empty, use the click x value
+                    # If the region is empty, use the click x value'''
              
     
          # Save the pixel and wavelength information to a .dat file
-         with open("clicked_points.dat", "a") as file:
-                     file.write(f"{fitted_x} {wavelength}\n")            
+        ''' with open("clicked_points.dat", "a") as file:
+                     file.write(f"{fitted_x} {wavelength}\n")'''       
 #return
                     
            
