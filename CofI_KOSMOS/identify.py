@@ -25,11 +25,10 @@ import glob
 import astropy.units as u
 
 
-__all__ = ['loadlinelist', 'loadarctemplate', 
+__all__ = ['loadlinelist', 'loadarctemplate', 'identify_widget',
             'identify_nearest', 'identify_dtw', 
            'find_peaks', 'fit_wavelength', 'air_to_vac']
 
-#'identify_widget',
 def _gaus(x, a, b, x0, sigma):
     """
     Define a simple Gaussian curve
