@@ -1,3 +1,9 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+from ipywidgets import widgets, HBox
+from matplotlib.widgets import RectangleSelector
+
 def identify_widget(arcspec, silent=False):
     """
     Interactive version of the Identify GUI, specifically using ipython widgets.
