@@ -397,28 +397,31 @@ def identify_widget(arcspec, silent=False):
         # try to fit a Gaussian in the REGION (rgn) near the click
         rgn = np.where((np.abs(xpixels - event.xdata) <= 5.))[0]
         if len(rgn) > 0:
-            try:
-            sig_guess = 3.
-            p0 = [np.nanmax(flux[rgn]), np.nanmedian(flux), event.xdata, sig_guess]
-            popt, _ = curve_fit(_gaus, xpixels[rgn], flux[rgn], p0=p0)
-            # Record x value of click in text box
-            #xval.value = popt[2]
-            fitted_x = popt[2]
-            xval.value = fitted_x
-            except RuntimeError:
-            # fall back to click itself if that doesnt work
-            #xval.value = event.xdata
-            fitted_x = event.xdata
-            xval.value = fitted_x
+                     try:
+                        sig_guess = 3.
+                        p0 = [np.nanmax(flux[rgn]), np.nanmedian(flux), event.xdata, sig_guess]
+                        popt, _ = curve_fit(_gaus, xpixels[rgn], flux[rgn], p0=p0)
+                        # Record x value of click in text box
+                        #xval.value = popt[2]
+                        fitted_x = popt[2]
+                        xval.value = fitted_x
+                     except RuntimeError:
+                                 fitted_x = event.xdata
+                                 xval.value = fitted_x
+                                 # fall back to click itself if that doesnt work
+                                 #xval.value = event.xdata
          else:
+                     fitted_x = event.xdata
+                     xval.value = fitted_x
                     # If the region is empty, use the click x value
-             fitted_x = event.xdata
-             xval.value = fitted_x
+             
     
          # Save the pixel and wavelength information to a .dat file
          with open("clicked_points.dat", "a") as file:
                      file.write(f"{fitted_x} {wavelength}\n")            
 #return
+                    
+           
 
     fig.canvas.mpl_connect('button_press_event', onplotclick)
 
