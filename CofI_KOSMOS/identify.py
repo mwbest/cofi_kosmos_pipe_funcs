@@ -408,7 +408,7 @@ def identify_widget(arcspec, silent=False):
             xval.value = event.xdata
        # Save the pixel and wavelength information to a .dat file           
         with open("clicked_points.dat", "a") as file:
-                            file.write(f"{fitted_x} {wavelength}\n")       
+                            file.write(f"{popt[2]} {wavelength}\n")       
 #return
     fig.canvas.mpl_connect('button_press_event', onplotclick)
 
