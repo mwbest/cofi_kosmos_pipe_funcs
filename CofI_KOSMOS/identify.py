@@ -321,7 +321,7 @@ def identify_nearest(arcspec, wapprox=None, linelist=None, linewave=None,
     return xpoints, wpoints * xpixels.unit
 
 
-#def identify_widget(arcspec, silent=False):
+def identify_widget(arcspec, silent=False):
     """
     Interactive version of the Identify GUI, specifically using ipython widgets.
 
@@ -350,9 +350,9 @@ def identify_nearest(arcspec, wapprox=None, linelist=None, linewave=None,
     pixel, wavelength
     """
 
-    '''# the fluxes & pixels within the arc-spectrum
+    # the fluxes & pixels within the arc-spectrum
     flux = arcspec.flux.value
-    xpixels = arcspec.spectral_axis.value'''
+    xpixels = arcspec.spectral_axis.value
 
     msg = '''
     Instructions:
@@ -365,7 +365,7 @@ def identify_nearest(arcspec, wapprox=None, linelist=None, linewave=None,
     3) Click the Assign button, and a red line will be drawn marking the feature.
     4) When you've identified all your lines, stop the interaction for (or close) the figure.'''
 
-    '''if not silent:
+    if not silent:
         print(msg)
 
     xpxl = []
@@ -428,7 +428,7 @@ def identify_nearest(arcspec, wapprox=None, linelist=None, linewave=None,
     display(widgets.HBox([xval, linename, button]))
 
     # return np.array(xpxl), np.array(waves)
-    return xpxl, waves'''
+    return xpxl, waves
 
 
 def identify_dtw(arc, ref, display=False, upsample=False, Ufactor=5,
