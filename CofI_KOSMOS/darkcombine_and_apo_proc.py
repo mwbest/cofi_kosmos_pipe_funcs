@@ -211,6 +211,6 @@ def darkcombine(darkfiles_list, bias, directory, trim=False, ilum_value=None):
         dark_frame_trimmed = apo_proc(combined_dark_trimmed_path, ilum=ilum_value, Saxis=1, Waxis=0)
         fits.writeto(combined_dark_trimmed_path, dark_frame_trimmed, overwrite=True)
     return CCDData.read(combined_dark_trimmed_path, unit='adu')
-
+    else:
     # Return combined dark frame as CCDData object
     return CCDData.read(combined_dark_path, unit='adu')
