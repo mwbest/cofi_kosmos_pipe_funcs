@@ -176,41 +176,33 @@ def darkcombine(darkfiles_list, bias, directory, trim=False, ilum_value=None):
     # otherwise, you will be attempting to save files that already exist.
     # Thus, please comment this block of code out once you run it.
     bias_data = fits.getdata(bias)
-    calibrated_dark_files = []
+    calibrated_darks = []
     for i, darkfile in enumerate(darkfiles_list, start=1):
         dark_data = fits.getdata(darkfile) - bias_data
-        calibrated_filename = path / f"calibrated_darkfile{i}.fits"
-        fits.writeto(calibrated_filename, dark_data, overwrite=True)
-        calibrated_dark_files.append(str(calibrated_filename))
+        calibrated_darks.append(CCDData(dark_data, unit=u.adu))
 
     # Using Jim Davenport's "pykosmos.biascombine" function to combine calibrated dark frames.
-    combined_dark_data = pykosmos.biascombine(calibrated_dark_files)
-    combined_dark_path = path / "calibrated_combined_darkfiles.fits"
-
-    # The code below saves the combined dark frame as a "fits" file.
-    fits.writeto(combined_dark_path, combined_dark_data, overwrite=True)
+    combined_dark_data = Combiner(calibrated_darks).median_combine()
+    output_path = Path(output_directory)
+    combined_dark_path = output_path / "combined_dark.fits"
 
     # The block below appends "EXPTIME" keyword to the header of the file containing the combined dark frame.
     # Appended "EXPTIME" has the same value as that of the raw dark frames provided by the user.
     # Please run the following block of code (until the next comment) only once,
     # otherwise the keyword will be appended to the header every time you run it.
     # To avoid running this code multiple times, after running it once, just comment it out.
-    with fits.open(combined_dark_path, mode='update') as hdul:
-        hdul[0].header["EXPTIME"] = exp_time
+    hdu = fits.PrimaryHDU(combined_dark_data)
+    hdu.header["EXPTIME"] = exp_time
+    hdu.writeto(combined_dark_path, overwrite=True)
     # If trim is set to True, trim the combined dark frame to the size of the science image and return trimmed
     # combined dark frame as a CCDData object. In order to do that, first the "DATASEC" keyword is appended.
     # Otherwise, just return the combined dark frame as a CCDData object.
     if trim:
-        combined_dark_trimmed_path = path / "calibrated_combined_trimmed_darkfiles.fits"
-        with fits.open(combined_dark_path) as hdul:
-            hdul[0].header["DATASEC"] = "[1:2048,1:4096]"
-            fits.writeto(combined_dark_trimmed_path, hdul[0].data, hdul[0].header, overwrite=True)
-
-    # Trim the dark frame using "apo_proc" function and process with ilum_value.
-    if ilum_value is not None:
-        dark_frame_trimmed = apo_proc(combined_dark_trimmed_path, ilum=ilum_value, Saxis=1, Waxis=0)
-        fits.writeto(combined_dark_trimmed_path, dark_frame_trimmed, overwrite=True)
-    return CCDData.read(combined_dark_trimmed_path, unit='adu')
-    else:
-    # Return combined dark frame as CCDData object
-    return CCDData.read(combined_dark_path, unit='adu')
+        combined_dark_trimmed_path = output_path / "combined_dark_trimmed.fits"
+        hdu.header["DATASEC"] = "[1:2048,1:4096]"
+        trimmed_data = apo_proc(combined_dark_data, ilum=ilum_value, Saxis=1, Waxis=0)
+        hdu_trimmed = fits.PrimaryHDU(trimmed_data, header=hdu.header)
+        hdu_trimmed.writeto(combined_dark_trimmed_path, overwrite=True)
+        return CCDData(trimmed_data, unit=u.adu)
+    
+    return CCDData(combined_dark_data, unit=u.adu)
