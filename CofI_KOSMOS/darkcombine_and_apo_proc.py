@@ -183,7 +183,7 @@ def darkcombine(darkfiles_list, bias, directory, trim=False, ilum_value=None):
 
     # Using Jim Davenport's "pykosmos.biascombine" function to combine calibrated dark frames.
     combined_dark_data = Combiner(calibrated_darks).median_combine()
-    output_path = Path(output_directory)
+    output_path = Path(directory)
     combined_dark_path = output_path / "combined_dark.fits"
 
     # The block below appends "EXPTIME" keyword to the header of the file containing the combined dark frame.
